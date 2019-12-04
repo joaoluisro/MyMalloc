@@ -8,6 +8,6 @@ int main(){
   b = 3;
   long int c;
   c = f();
-  return c;
+  printf("%ld", c);
 
 }

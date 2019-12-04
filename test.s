@@ -1,23 +1,27 @@
 .section .data
   A: .quad 0
   B: .quad 0
+  TOPO_HEAP: .quad
+  NOVO_TOPO: .quad
 .section .text
-.globl _start
-f:
+.globl meuMalloc
+meuMalloc:
   pushq %rbp
-  movq $4, %rax
-  movq $2, %rbx
-  addq %rax, %rbx
-  movq %rbx, %rax
+  movq %rsp, %rbp
+  movq $12, %rax
+  syscall
+  movq %rax, TOPO_HEAP
+  addq $10, NOVO_TOPO
+  movq  NOVO_TOPO, %rdi
+  movq $12, %rax
+  syscall
   popq %rbp
   ret
-_start:
-  movq $6, A
-  movq $7, B
-  movq A, %rax
-  movq B, %rbx
-  call f
-  addq %rbx, %rax
-  movq $60, %rax
-  movq %rbx, %rdi
+.globl mal
+mal:
+  pushq %rbp
+  movq %rsp, %rbp
+  movq $12, %rax
   syscall
+  popq %rbp
+  ret
