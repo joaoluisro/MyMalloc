@@ -6,67 +6,33 @@ extern void iniciaAlocador();
 extern void finalizaAlocador();
 extern void* alocaMem(long int x);
 extern void* alturabrk();
+extern void desalocaMem(void *x);
 
 int main(){
   void *x;
   void *b;
   void *y = x;
   printf("\n");
-  printf("altura inicial %x\n",alturabrk());
   iniciaAlocador();
-  printf("altura atual: %x\n", alturabrk());
-  x = alocaMem(100);
-  printf("altura atual: %x\n",alturabrk());
+  x = alocaMem(8);
+  //strcpy(x,"abba");
+  printf("x : %x\n",x);
+  printf("x.prox = %x\n", *(long int*)(x - sizeof(long int)));
+  printf("x.tam = %ld\n", *(long int*)(x - 2*sizeof(long int)));
+  printf("x.val = %ld\n", *(long int*)(x - 3*sizeof(long int)));
+  y = alocaMem(8);
+
+  printf("\n");
+  printf("y : %x\n",y);
+  printf("y.prox = %x\n", *(long int*)(y - sizeof(long int)));
+  printf("y.tam = %ld\n", *(long int*)(y - 2*sizeof(long int)));
+  printf("y.val = %ld\n", *(long int*)(y - 3*sizeof(long int)));
+  printf("\n");
+  b = alocaMem(8);
+  printf("b : %x\n",b);
+
+  printf("altura : %x\n",alturabrk());
   finalizaAlocador();
   printf("altura final: %x\n",alturabrk());
-  /*
-  alturabrk();
-  iniciaAlocador();
-  alturabrk();
-  printf("altura inicial %x\n",alturabrk());
-  x = alocaMem(100);
-  printf("ender x : %x\n",x);
-  printf("altura atual : %x\n",alturabrk());
-  //y = alocaMem(200);
-  //printf("ender y : %x\n",y);
-  //printf("%x\n",alturabrk());
-  finalizaAlocador();
-  printf("altura final : %x\n",alturabrk());
-  //printf("%x\n",alturabrk());
-  /*
-  printf("BRK: %x\n", alturabrk());
-  x = alocaMem(10);
-  printf("BRK: %x\n", alturabrk());
-  strcpy(x, "ABC");
-  void *y = x;
-  while(*(char *)y != '\0'){
-    printf("%c  ", *(char*)y);
-    printf("%x\n", y);
-    y += sizeof(char);
-  }
-  printf("BRK: %x\n",alturabrk());
-  printf("Inicio Heap: %x\n",a);
-  printf("diff : %x \n", b - a);
-  //printf("%s\n",x);
-  //printf("%X\n",&(x));
-  //Pintf("%s\n",*(&(x))
-  printf("BRK: %x\n", alturabrk());
 
-  //finalizaAlocador();
-  void *z = alocaMem(100);
-  printf("BRK: %x\n", alturabrk());
-  printf("diff : %x \n", alturabrk() - b);
-  void *u = alocaMem(100);
-    printf("BRK: %x\n", alturabrk());
-  //printf("BRK: %x\n", alturabrk());
-  strcpy(u,"abba");
-  y = u;
-  while(*(char *)y != '\0'){
-    printf("%c  ", *(char*)y);
-    printf("%x\n", y);
-    y += sizeof(char);
-  }
-  printf("BRK: %x\n", alturabrk());
-  return 0;
-  */
 }
