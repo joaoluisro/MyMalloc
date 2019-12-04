@@ -1,10 +1,5 @@
-# Trabalho Software Básico
-- [x] Funções sem variáveis locais e sem parâmetros
-- [x] Funções com variáveis locais e sem parâmetros
-- [ ] Funções com variáveis locais e com parâmetros
-- [ ] Funções com recursão
-- [ ] Entender enunciado
-
+# MyMalloc
+Uma implementação da função ```malloc()``` na linguagem assembly da família AMD64. O objetivo é possuir uma gama de implementações de diferentes qualidades.
 ## Observações importantes
 ### Compilando Assembly
 - as arquivo.s -o arquivo.o
@@ -12,8 +7,17 @@
 ### Chamando funções assembly em C
 - Usar *globl* antes de toda função
 - Compilar com gcc -o arquivo1.c arquivo2.s
+- Não utilizar *_start* caso haja um procedimento ```main```
 
 ## Primeira implementação
+### A implementação ingênua
+```c
+  void iniciaAlocador();
+  void finalizaAlocador();
+  void* alocaMem(int tam);
+```
+A implementação é ruim por considerar que a secção heap é infinita, sem reaproveitar nenhum espaço de memória.
+## Segunda implementação
 - Uma única lista encadeada.
 
 ```c
@@ -23,17 +27,12 @@ typedef struct{
   nodo* proximo;
 } nodo;
 
-void inicia_alocador(){
+void iniciaAlocador();
 
-}
+void finalizaAlocador();
 
-void encerra_alocador(){
+void* alocaMem(int tam);
 
-}
-
-void aloca(){
-
-}
-
-void desaloca()
+void desalocaMem();
 ```
+Uma implementação melhor.

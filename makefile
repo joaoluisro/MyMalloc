@@ -1,6 +1,4 @@
 all:
-	as test.s -o test.o
-	ld test.o -o test
+	cd malloc_v1; gcc malloc_v1.c malloc_v1.s -o malloc_v1 -w
 clean:
-	rm -rf	*.o
-	rm -rf	test
+	find . -name '*.o' -type f -delete
