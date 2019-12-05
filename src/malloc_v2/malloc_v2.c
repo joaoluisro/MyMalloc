@@ -11,7 +11,7 @@ extern void desalocaMem(void *x);
 int main(){
   void *x;
   void *b;
-  void *y = x;
+  void *y;
   printf("\n");
   iniciaAlocador();
   x = alocaMem(8);
