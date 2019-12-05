@@ -1,18 +1,18 @@
 cd src
 
-echo $1
-
-for i in 5.1 5.2a 5.2e 5.4
+for i in 5_1 5_2a 5_2e 5_4
 	do
 	cd $i
 	echo $i
 	if [ $1 == clean ]
 	then
-		echo $1
 		make clean
-	else
+	elif [ $1 == all ]
 	then
 		make
+	elif [ $1 == run ]
+	then
+		./$i
 	fi
 	cd ..
 done

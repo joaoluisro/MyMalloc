@@ -1,6 +1,8 @@
 .section .data
   topoInicialHeap: .quad 0
   topoHeap: .quad 0
+  head: .quad 0
+  tail: .quad 0
 .section .text
 .globl _start
 .globl iniciaAlocador
@@ -44,9 +46,13 @@ alocaMem:
   addq $48, %rbx
   addq %rdx, %rbx
   movq %rbx, 16(%rax)  # proximo_bloco = proximo
-
   movq %rsi, %rax       # retorna primeiro end.
   addq $24, %rax
+  cmpq $0, head
+  jne adiciona
+  movq %rax, head
+  adiciona:
+    movq %rax, tail
   popq %rbp
   ret
 
@@ -65,5 +71,21 @@ alturabrk:
   movq $12, %rax
   movq $0, %rdi
   syscall
+  popq %rbp
+  ret
+
+.globl ret_tail
+ret_tail:
+  pushq %rbp
+  movq %rsp, %rbp
+  movq tail, %rax
+  popq %rbp
+  ret
+
+.globl ret_head
+ret_head:
+  pushq %rbp
+  movq %rsp, %rbp
+  movq head, %rax
   popq %rbp
   ret
